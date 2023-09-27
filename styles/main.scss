@@ -1,0 +1,25 @@
+$black: #141b1e;
+$white: #dadada;
+
+:root {
+  font-family: Roboto, serif;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  background-color: $black;
+  color: $white;
+}
+
+main {
+  flex: 1;
+}
+
+
+section {}
