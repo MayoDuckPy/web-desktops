@@ -3,13 +3,11 @@ use leptos_meta::*;
 use leptos_router::*;
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
+pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
-    provide_meta_context(cx);
+    provide_meta_context();
 
     view! {
-        cx,
-
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/web-desktops.css"/>
 
@@ -20,7 +18,7 @@ pub fn App(cx: Scope) -> impl IntoView {
         <Router>
             <main>
                 <Routes>
-                    <Route path="" view=|cx| view! { cx, <HomePage/> }/>
+                    <Route path="" view=|| view! { <HomePage/> }/>
                 </Routes>
             </main>
         </Router>
@@ -28,16 +26,17 @@ pub fn App(cx: Scope) -> impl IntoView {
 }
 
 #[component]
-pub fn HomePage(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn HomePage() -> impl IntoView {
+    view! {
         <Script type_="module">
         r#"
-            import { startCapture, stopCapture } from '/scripts/stream.js';
+            import { connectClient, createServer, closeConnection } from '/scripts/stream.js';
 
             window.onload = () => {
-                document.getElementById('startButton').onclick = startCapture;
-                document.getElementById('stopButton').onclick = stopCapture;
-            }
+                document.getElementById('clientConnect').onclick = connectClient;
+                document.getElementById('serverConnect').onclick = createServer;
+                document.getElementById('closeConnection').onclick = closeConnection;
+            };
         "#
         </Script>
 
@@ -45,10 +44,11 @@ pub fn HomePage(cx: Scope) -> impl IntoView {
             <div class="filler"></div>
             <article>
                 <h1>"Welcome to Leptos!"</h1>
-                <video></video>
+                <video autoplay></video>
                 <div>
-                    <button id="startButton">Start</button>
-                    <button id="stopButton">Stop</button>
+                    <button id="clientConnect">Start Client</button>
+                    <button id="serverConnect">Start Server</button>
+                    <button id="closeConnection">Reset</button>
                 </div>
             </article>
         </section>

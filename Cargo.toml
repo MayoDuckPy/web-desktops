@@ -7,33 +7,37 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-axum = { version = "0.6.20", optional = true }
+axum = { version = "0.6.20", features = ["tokio"], optional = true }
 cfg-if = "1.0.0"
 console_error_panic_hook = "0.1.7"
 console_log = "1.0.0"
+futures = "0.3.28"
 http = "0.2.9"
 hyper = "0.14.27"
-leptos = { version = "0.4.10", features = ["serde"] }
-leptos_axum = { version = "0.4.10", optional = true }
-leptos_meta = { version = "0.4.10" }
-leptos_router = { version = "0.4.10" }
+leptos = { version = "0.5.1", features = ["serde", "nightly"] }
+leptos_axum = { version = "0.5.1", optional = true }
+leptos_meta = { version = "0.5.1", features = ["nightly"] }
+leptos_router = { version = "0.5.1", features = ["nightly"] }
 log = "0.4.20"
 serde = { version = "1.0.188", features = ["derive"] }
 serde_json = "1.0.107"
+serde_with = "3.3.0"
 simple_logger = "4.2.0"
-tokio = { version = "1.32.0", features = ["macros", "rt-multi-thread"], optional = true }
+tokio = { version = "1.32.0", features = ["macros", "rt-multi-thread", "sync"], optional = true }
+tokio-stream = { version = "0.1.14", features = ["sync"], optional = true }
 tower = { version = "0.4.13", optional = true }
 tower-http = { version = "0.4.4", features = ["fs"], optional = true }
 wasm-bindgen = "0.2.87"
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
-ssr = ["dep:axum", "dep:tokio", "dep:tower", "dep:tower-http", "dep:leptos_axum", "leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr"]
+ssr = ["dep:axum", "dep:tokio", "dep:tokio-stream", "dep:tower", "dep:tower-http", "dep:leptos_axum", "leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr"]
 
 [package.metadata.cargo-all-features]
 denylist = [
     "axum",
     "tokio",
+    "tokio-stream",
     "tower",
     "tower-http",
     "leptos_axum",
