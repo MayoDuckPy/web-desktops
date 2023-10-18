@@ -30,12 +30,13 @@ pub fn HomePage() -> impl IntoView {
     view! {
         <Script type_="module">
         r#"
-            import { connectClient, createServer, closeConnection } from '/scripts/stream.js';
+            import { connectClient, createServer, closeConnection, fullscreen } from '/scripts/stream.js';
 
             window.onload = () => {
                 document.getElementById('clientConnect').onclick = connectClient;
                 document.getElementById('serverConnect').onclick = createServer;
                 document.getElementById('closeConnection').onclick = closeConnection;
+                document.getElementById('fullscreen').onclick = fullscreen;
             };
         "#
         </Script>
@@ -49,6 +50,7 @@ pub fn HomePage() -> impl IntoView {
                     <button id="clientConnect">Start Client</button>
                     <button id="serverConnect">Start Server</button>
                     <button id="closeConnection">Reset</button>
+                    <button id="fullscreen">Fullscreen</button>
                 </div>
             </article>
         </section>

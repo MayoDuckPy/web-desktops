@@ -15,9 +15,10 @@ async function startCapture() {
   let capture = null;
   const displayMediaOptions = {
     video: {
-      displaySurface: "monitor",
+      displaySurface: 'monitor',
     },
     audio: true,
+    systemAudio: 'include'
   };
 
   try {
@@ -69,12 +70,12 @@ export async function createServer() {
 
     // Create and signal answer
     let answer = await conn.createAnswer();
-    await conn.setLocalDescription(answer);
     await fetch('/api/answer', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(answer)
     });
+    await conn.setLocalDescription(answer);
   };
 }
 
@@ -86,8 +87,12 @@ export async function connectClient() {
   let video = document.querySelector('video');
   video.srcObject = mediaStream;
   conn.ontrack = event => {
-    if (event.type == 'track')
-      mediaStream.addTrack(event.track);
+    if (event.streams && event.streams.length > 0) {
+      event.streams[0].getTracks.forEach(track => {
+        mediaStream.addTrack(track);
+      });
+    } else if (event.type == 'track')
+        mediaStream.addTrack(event.track);
   };
 
   // Trickle ICE candidates to server
@@ -121,13 +126,12 @@ export async function connectClient() {
     'offerToReceiveVideo': true
   };
   let offer = await conn.createOffer(offerOptions);
-
-  await conn.setLocalDescription(offer);
   await fetch('/api/offer', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(offer)
   });
+  await conn.setLocalDescription(offer);
 }
 
 export function closeConnection() {
@@ -152,4 +156,9 @@ export function closeConnection() {
     conn.close();
     conn = null;
   };
+}
+
+export async function fullscreen() {
+  let video = document.querySelector('video');
+  await video.requestFullscreen();
 }
