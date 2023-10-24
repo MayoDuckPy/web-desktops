@@ -1,6 +1,7 @@
 use cfg_if::cfg_if;
 pub mod api;
 pub mod app;
+pub mod video_player;
 // pub mod error_template;
 // pub mod fileserv;
 

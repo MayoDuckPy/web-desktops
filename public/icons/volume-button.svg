@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1023.9999"
+   height="1024"
+   viewBox="0 0 270.93331 270.93334"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <defs
+     id="defs2" />
+  <g
+     id="layer2"
+     transform="translate(-9.4745186)"
+     style="display:inline;fill:#ffffff;stroke:none">
+    <g
+       id="g7"
+       transform="translate(1.3620837)">
+      <path
+         id="rect2"
+         style="stroke-width:1.49992;stroke-linecap:round"
+         d="m 161.41974,40.216666 c -17.35936,0 -84.931664,41.37968 -85.016214,41.425376 H 33.506939 c -2.491282,0 -3.010368,0.34656 -3.010368,2.506872 l 0.95157,102.066356 c 0,2.63766 1.243446,2.89539 3.870751,2.89539 0.0028,0 42.599914,-0.77094 42.599914,-0.77094 0,0 66.129884,42.37695 83.500934,42.37695 z" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:24.3417;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 195.27146,100.60593 c 7.29605,8.18709 7.96215,52.00991 0,62.43548"
+         id="path5" />
+      <path
+         style="fill:none;stroke:#ffffff;stroke-width:21.1667;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 231.48623,59.654909 c 35.5101,35.5101 41.47853,104.187011 0,145.665541"
+         id="path7" />
+    </g>
+  </g>
+  <metadata
+     id="metadata824">
+    <rdf:RDF />
+  </metadata>
+</svg>

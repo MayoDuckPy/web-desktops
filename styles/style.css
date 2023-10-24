@@ -1,0 +1,239 @@
+:root {
+  --black: #141b1e;
+  --dark-gray: #232a2d;
+  --red: #e57474;
+  --green: #8ccf7e;
+  --yellow: #e5c76b;
+  --blue: #67b0e8;
+  --magenta: #c47fd5;
+  --cyan: #6cbfbf;
+  --light-gray: #b3b9b8;
+  --white: #dadada;
+
+  --ui-transition-time: 200ms;
+
+  font-family: Roboto, serif;
+}
+
+html,
+body,
+main {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  background-color: var(--black);
+  color: var(--white);
+}
+
+main {
+  padding: 1.5rem;
+}
+
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  height: 100%;
+}
+
+button,
+input {
+  cursor: pointer;
+}
+
+input[type="range"] {
+  appearance: none;
+  background-color: transparent;
+
+  width: 8rem;
+  height: 2px;
+  border-radius: 2px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* Firefox range input */
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--dark-gray);
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 1rem;
+}
+
+input[type="range"]::-moz-range-progress {
+  background-color: white;
+  height: 3px;
+}
+
+input[type="range"]::-moz-range-track {
+  background-color: var(--light-gray);
+}
+
+/* Chrome range input */
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: white;
+  height: 3px;
+  margin-top: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: var(--dark-gray);
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: 1rem;
+
+  /* Slider thumb not centered by default */
+  margin-top: -7px;
+}
+
+
+button {
+  padding: 0.5em;
+  margin: 0;
+  border: 0;
+  border-radius: 0.2rem;
+
+  color: var(--black);
+  background-color: var(--white);
+}
+
+/* Clear browser defaults */
+dialog {
+  max-width: 100vw;
+  max-height: 100vw;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#videoPlayerModal {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+#videoPlayerModal::backdrop {
+  display: none;
+}
+
+#videoPlayer {
+  display: relative;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  overflow: hidden
+}
+
+#videoPlayer video {
+  height: 100%;
+  width: 100%;
+
+  background-color: black;
+  transition: cursor var(--ui-transition-time);
+}
+
+#videoPlayer:hover>#videoControls[data-ui_visible] {
+  opacity: 1;
+}
+
+#videoPlayer:hover>#videoControls[data-ui_visible]>* {
+  pointer-events: auto;
+}
+
+/* Disable click events passing through video controls */
+#videoControls[data-ui_visible]:hover~video {
+  pointer-events: none;
+}
+
+#videoControls {
+  --primary-bg: #00000040;
+
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: clamp(0.75rem, 3%, 3vh) clamp(0.75rem, 2%, 2vw);
+
+  z-index: 1;
+  transition: opacity var(--ui-transition-time) ease-in-out;
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  pointer-events: none;
+}
+
+#videoControls>* {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#videoControls>*:hover {
+  opacity: 1;
+}
+
+#videoControls button {
+  padding: 0;
+
+  background-color: transparent;
+}
+
+#videoControls .topControls {
+  margin-bottom: auto;
+  box-shadow: 0 -1rem 36px 2.5rem var(--primary-bg);
+  background: var(--primary-bg);
+}
+
+#videoControls .bottomControls {
+  margin-top: auto;
+  background: var(--primary-bg);
+  box-shadow: 0 1rem 36px 2.5rem var(--primary-bg);
+}
+
+#videoControls .volumeSlider {
+  position: relative;
+  left: -0.5rem;
+  top: -0.15rem;
+  margin: 0;
+}
+
+#videoControls .fullscreenButton {
+  margin-left: auto;
+}
+
+#connect-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+#clientConnect {
+  background-color: var(--green);
+}
+
+#serverConnect {
+  background-color: var(--blue);
+}
+
+#closeConnection {
+  background-color: var(--red);
+}

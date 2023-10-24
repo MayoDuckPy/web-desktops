@@ -46,7 +46,7 @@ export async function createServer() {
 
   // Trickle ICE candidates to client
   conn.onicecandidate = async event => {
-    if (event.candidate == null) { return; };
+    if (event.candidate == null) { return; }
 
     await fetch('/api/answer/ice', {
       method: 'POST',
@@ -97,7 +97,7 @@ export async function connectClient() {
 
   // Trickle ICE candidates to server
   conn.onicecandidate = async event => {
-    if (event.candidate == null) { return; };
+    if (event.candidate == null) { return; }
 
     await fetch('/api/offer/ice', {
       method: 'POST',
@@ -143,22 +143,17 @@ export function closeConnection() {
     sdpEvent.onmessage = null;
     sdpEvent.close();
     sdpEvent = null;
-  };
+  }
 
   if (iceEvent) {
     iceEvent.onmessage = null;
     iceEvent.close();
     iceEvent = null;
-  };
+  }
 
   if (conn) {
     conn.onicecandidate = null;
     conn.close();
     conn = null;
-  };
-}
-
-export async function fullscreen() {
-  let video = document.querySelector('video');
-  await video.requestFullscreen();
+  }
 }

@@ -1,3 +1,4 @@
+use crate::video_player::VideoPlayer;
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
@@ -28,31 +29,14 @@ pub fn App() -> impl IntoView {
 #[component]
 pub fn HomePage() -> impl IntoView {
     view! {
-        <Script type_="module">
-        r#"
-            import { connectClient, createServer, closeConnection, fullscreen } from '/scripts/stream.js';
-
-            window.onload = () => {
-                document.getElementById('clientConnect').onclick = connectClient;
-                document.getElementById('serverConnect').onclick = createServer;
-                document.getElementById('closeConnection').onclick = closeConnection;
-                document.getElementById('fullscreen').onclick = fullscreen;
-            };
-        "#
-        </Script>
-
         <section>
-            <div class="filler"></div>
-            <article>
-                <h1>"Welcome to Leptos!"</h1>
-                <video autoplay></video>
-                <div>
-                    <button id="clientConnect">Start Client</button>
-                    <button id="serverConnect">Start Server</button>
-                    <button id="closeConnection">Reset</button>
-                    <button id="fullscreen">Fullscreen</button>
-                </div>
-            </article>
+            <h1>"Web Desktops"</h1>
+            <VideoPlayer/>
+            <div id="connect-buttons">
+                <button id="clientConnect">Start Client</button>
+                <button id="serverConnect">Start Server</button>
+                <button id="closeConnection">Reset</button>
+            </div>
         </section>
     }
 }
