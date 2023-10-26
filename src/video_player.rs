@@ -14,6 +14,7 @@ pub fn VideoPlayer() -> impl IntoView {
     // Video player button/imgs
     let playback_img = RwSignal::new("/icons/play-button.svg");
     let volume_img = RwSignal::new("/icons/volume-button.svg");
+    let volume_mask = RwSignal::new(100); // Percentage masked
     let volume = RwSignal::new(1.0);
 
     // Handle video ui disappearing after inactivity
@@ -106,6 +107,10 @@ pub fn VideoPlayer() -> impl IntoView {
                                 prop:src=volume_img
                                 height=24
                                 width=24
+                                style:clip-path=move || {
+                                    let mask = volume_mask.get();
+                                    format!("polygon(0 0, 0 100%, {mask}% 100%, {mask}% 0)")
+                                }
                             >
                             </img>
                         </button>
@@ -145,11 +150,19 @@ pub fn VideoPlayer() -> impl IntoView {
                     on:play=move |_| { playback_img.set("/icons/pause-button.svg"); }
                     on:pause=move |_| { playback_img.set("/icons/play-button.svg"); }
                     on:volumechange=move |_| {
-                        let img = match volume.get_untracked() > 0.0 {
+                        let vol = volume.get_untracked();
+                        let img = match vol > 0.0 {
                             true  => "/icons/volume-button.svg",
                             false => "/icons/volume-button-mute.svg",
                         };
                         volume_img.set(img);
+
+                        // Apply mask *after* img src is set
+                        if vol > 0.3 || vol == 0.0 {
+                            volume_mask.set(100);
+                        } else {
+                            volume_mask.set(80);
+                        }
                     }
                     on:click=move |_| { toggle_playback(video_element); }
                     on:dblclick=move |_| { toggle_fullscreen(video_player_element); }
